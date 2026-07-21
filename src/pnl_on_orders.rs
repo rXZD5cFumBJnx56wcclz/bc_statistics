@@ -1,11 +1,5 @@
-use crate::{orders::Orders, pnl::Pnl, prelude::*, utils::all};
+use crate::{orders::orders, pnl::pnl, prelude::*, utils::all};
 
-pub trait PnlOnOrders: Pnl + Orders {
-    fn pnl_on_orders(&self) -> Vec<f64>;
-}
-
-impl PnlOnOrders for StatCollector<'_> {
-    fn pnl_on_orders(&self) -> Vec<f64> {
-        all(&[self.pnl(), self.orders()])
-    }
+pub fn pnl_on_orders(stat_collector: &StatCollector) -> Vec<f64> {
+    all(&[pnl(stat_collector), orders(stat_collector)])
 }

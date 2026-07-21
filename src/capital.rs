@@ -1,13 +1,7 @@
 use crate::prelude::*;
 
-pub trait Capital<'a> {
-    fn capital(&'a self) -> Vec<f64>;
-}
-
-impl<'a> Capital<'a> for StatCollector<'a> {
-    fn capital(&'a self) -> Vec<f64> {
-        self.into_iter().map(|v| v.capital).collect()
-    }
+pub fn capital(stat_collector: &StatCollector) -> Vec<f64> {
+    stat_collector.into_iter().map(|v| v.capital).collect()
 }
 
 // #[cfg(test)]

@@ -1,11 +1,5 @@
-use crate::{prelude::*, value_from_pos::ValueFromPos};
+use crate::{prelude::*, utils::value_from_pos};
 
-pub trait Qty: ValueFromPos {
-    fn qty(&self) -> Vec<f64>;
-}
-
-impl Qty for StatCollector<'_> {
-    fn qty(&self) -> Vec<f64> {
-        self.value_from_pos(|p| p.qty)
-    }
+pub fn qty(stat_collector: &StatCollector) -> Vec<f64> {
+    value_from_pos(stat_collector, |p| p.qty)
 }

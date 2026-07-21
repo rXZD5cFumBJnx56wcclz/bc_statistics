@@ -1,13 +1,10 @@
 use crate::{
-    not_reduce_orders::NotReduceOrders, prelude::*, reduce_orders::ReduceOrders, utils::any,
+    not_reduce_orders::not_reduce_orders, prelude::*, reduce_orders::reduce_orders, utils::any,
 };
 
-pub trait Orders: NotReduceOrders + ReduceOrders {
-    fn orders(&self) -> Vec<f64>;
-}
-
-impl Orders for StatCollector<'_> {
-    fn orders(&self) -> Vec<f64> {
-        any(&[self.reduce_orders(), self.not_reduce_orders()])
-    }
+pub fn orders(stat_collector: &StatCollector) -> Vec<f64> {
+    any(&[
+        reduce_orders(stat_collector),
+        not_reduce_orders(stat_collector),
+    ])
 }
