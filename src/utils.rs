@@ -39,10 +39,11 @@ where
     stat_collector
         .states
         .iter()
-        .map(|c| {
+        .zip(stat_collector.src.iter())
+        .map(|(c, src)| {
             if f(func(c)) {
                 // stat used open prices
-                c.src[1]
+                src[1]
             } else {
                 f64::NAN
             }

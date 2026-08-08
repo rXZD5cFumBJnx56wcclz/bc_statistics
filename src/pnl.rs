@@ -6,10 +6,11 @@ pub fn pnl(stat_collector: &StatCollector) -> Vec<f64> {
     stat_collector
         .states
         .iter()
-        .map(|s| {
+        .zip(stat_collector.src.iter())
+        .map(|(s, src)| {
             if let Some(p) = s.positions.borrow().values().next() {
                 // Indicators will not be completely accurate if the statistics are used in real trading.
-                pnl_util(p.qty, p.avg_open_price, s.src[1], p.leverage, &p.side).1
+                pnl_util(p.qty, p.avg_open_price, src[1], p.leverage, &p.side).1
             } else {
                 f64::NAN
             }

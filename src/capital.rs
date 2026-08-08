@@ -1,7 +1,7 @@
 use crate::prelude::*;
 
 pub fn capital(stat_collector: &StatCollector) -> Vec<f64> {
-    stat_collector.into_iter().map(|v| v.capital).collect()
+    stat_collector.states.iter().map(|v| v.capital).collect()
 }
 
 // #[cfg(test)]
